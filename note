@@ -1,0 +1,5 @@
+REST + HTP
+
+Stores Json documents
+
+http://<server>/<index>/<type>/<id>
