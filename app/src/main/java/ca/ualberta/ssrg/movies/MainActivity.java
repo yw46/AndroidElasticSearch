@@ -52,10 +52,11 @@ public class MainActivity extends Activity {
 
         searchButton = (Button) findViewById(R.id.button1);
         editText = (EditText) findViewById(R.id.editText1);
+
         searchButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
-                        search(MainActivity.this);
+                        search(view);
                     }
                 });
 
@@ -121,31 +122,9 @@ public class MainActivity extends Activity {
 		movies.clear();
 
 		// TODO: Extract search query from text view
- //editText.getText().toString()
-        /*
-        searchButton.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        movieManager = new ESMovieManager(editText.getText().toString());
-                    }
-                });
-        */
         movieManager = new ESMovieManager(editText.getText().toString());
 
 		// TODO: Run the search thread
-        /*
-        searchButton.setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View view) {
-                        movieManager = new ESMovieManager(editText.getText().toString());
-                        SearchThread thread = new SearchThread(editText.getText().toString());
-                        thread.start();
-                        notifyUpdated();
-                    }
-                });
-                */
         SearchThread thread = new SearchThread(editText.getText().toString());
         thread.start();
         notifyUpdated();
