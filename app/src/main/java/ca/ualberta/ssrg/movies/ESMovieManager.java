@@ -94,7 +94,7 @@ public class ESMovieManager {
 			throw new UnsupportedOperationException("Not implemented!");
 		}
 
-		SimpleSearchCommand command = new SimpleSearchCommand(searchString);
+		SimpleSearchCommand command = new SimpleSearchCommand(searchString); // like in notes, "queryString:"dark""
 
 		String query = gson.toJson(command);
 		Log.i(TAG, "Json command: " + query);

@@ -4,12 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.ssrg.androidelasticsearch.R;
 
@@ -22,6 +28,10 @@ public class MainActivity extends Activity {
 	private MoviesController moviesController;
 
 	private Context mContext = this;
+
+    private Button searchButton;
+    private EditText editText;
+    private String temp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +111,25 @@ public class MainActivity extends Activity {
 		movies.clear();
 
 		// TODO: Extract search query from text view
-		
+        searchButton = (Button) findViewById(R.id.button1);
+        editText = (EditText) findViewById(R.id.editText1); //editText.getText().toString()
+        searchButton.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        movieManager = new ESMovieManager(editText.getText().toString());
+                        movieList.setOnItemClickListener(new OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int pos,	long id) {
+                                int movieId = movies.get(pos).getId();
+                                startDetailsActivity(movieId);
+                            }
+
+                        }); //aaa
+                    }
+                });
 		// TODO: Run the search thread
 		
 	}
