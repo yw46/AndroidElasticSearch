@@ -50,6 +50,15 @@ public class MainActivity extends Activity {
 		movieList.setAdapter(moviesViewAdapter);
 		movieManager = new ESMovieManager("");
 
+        searchButton = (Button) findViewById(R.id.button1);
+        editText = (EditText) findViewById(R.id.editText1);
+        searchButton.setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View view) {
+                        search(MainActivity.this);
+                    }
+                });
+
 		// Show details when click on a movie
 		movieList.setOnItemClickListener(new OnItemClickListener() {
 
@@ -107,31 +116,41 @@ public class MainActivity extends Activity {
 	 * Search for movies with a given word(s) in the text view
 	 * @param view
 	 */
+    // aaa
 	public void search(View view) {
 		movies.clear();
 
 		// TODO: Extract search query from text view
-        searchButton = (Button) findViewById(R.id.button1);
-        editText = (EditText) findViewById(R.id.editText1); //editText.getText().toString()
+ //editText.getText().toString()
+        /*
         searchButton.setOnClickListener(
                 new View.OnClickListener()
                 {
                     public void onClick(View view)
                     {
                         movieManager = new ESMovieManager(editText.getText().toString());
-                        movieList.setOnItemClickListener(new OnItemClickListener() {
-
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int pos,	long id) {
-                                int movieId = movies.get(pos).getId();
-                                startDetailsActivity(movieId);
-                            }
-
-                        }); //aaa
                     }
                 });
+        */
+        movieManager = new ESMovieManager(editText.getText().toString());
+
 		// TODO: Run the search thread
-		
+        /*
+        searchButton.setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View view) {
+                        movieManager = new ESMovieManager(editText.getText().toString());
+                        SearchThread thread = new SearchThread(editText.getText().toString());
+                        thread.start();
+                        notifyUpdated();
+                    }
+                });
+                */
+        SearchThread thread = new SearchThread(editText.getText().toString());
+        thread.start();
+        notifyUpdated();
+
+
 	}
 	
 	/**
