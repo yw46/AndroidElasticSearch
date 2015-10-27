@@ -1,0 +1,14 @@
+HTTP PUT
+{
+"title": "Toy Story",
+"director": "no idea",
+"year": 1995
+}
+
+
+Gson Search Query
+{"query":{
+    "query_string":{
+        "query":"dark"
+    }
+}

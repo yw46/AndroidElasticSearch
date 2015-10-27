@@ -1,5 +1,57 @@
-REST + HTP
+REST + HTTP
 
 Stores Json documents
 
 http://<server>/<index>/<type>/<id>
+
+Example:
+{"_index":"testing","_type":"movie","_id":"1","_version":18,"found":true,"_source":{
+"id":1
+"title":"The Dark Knight",
+"direction": "Nolan",
+"year":2008
+}}
+
+Command Line
+curl google.com
+
+
+HTTP PUT
+curl -XPUT ""http://cmput301.softwareprocess.es:8080/testing/movie/5473673" -d'{
+"title": "Toy Story",
+"director": "no idea",
+"year": 1995
+}'
+
+
+HTTP GET
+curl -XGET "http://cmput301.softwareprocess.es:8080/testing/movie/5473673"
+
+
+HTTP DELETE
+curl -XDELETE "http://cmput301.softwareprocess.es:8080/testing/movie/5473673"
+
+
+HTTP SEARCH
+We can also use "http://<server>/<index>/<type>/_search"
+// do not use -XPUT
+curl -XPOST "http://cmput301.softwareprocess.es:8080/testing/movie/_search" -d '{"query":{
+    "query_string":{
+        "query":"dark"
+    }
+}
+}'
+
+
+
+
+
+
+UIThread                     OtherThread
+set the widget
+  paint the screen   
+                     ->      
+                             gets the stuff from ES
+                             schedule UI update
+                     <-
+UI updated
