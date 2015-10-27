@@ -118,18 +118,16 @@ public class MainActivity extends Activity {
 	 * @param view
 	 */
     // aaa
-	public void search(View view) {
-		movies.clear();
+    public void search(View view) {
+        movies.clear();
 
 		// TODO: Extract search query from text view
-        movieManager = new ESMovieManager(editText.getText().toString());
+		movieManager = new ESMovieManager(editText.getText().toString());
 
 		// TODO: Run the search thread
-        SearchThread thread = new SearchThread(editText.getText().toString());
+		SearchThread thread = new SearchThread(editText.getText().toString());
         thread.start();
         notifyUpdated();
-
-
 	}
 	
 	/**
